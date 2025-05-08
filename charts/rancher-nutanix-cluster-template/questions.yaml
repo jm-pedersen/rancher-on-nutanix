@@ -24,16 +24,15 @@ questions:
   - k3s
   group: "General"
 - variable: kubernetesVersion
-  default: v1.24.11+rke2r1
+  default: v1.31.8+rke2r1
   description: "Specify RKE2 Kubernetes version"
   label: "RKE2 Kubernetes Version"
   type: enum
   show_if: kubernetesDistro=rke2
   required: true
   options:
-  - v1.25.7+rke2r1
-  - v1.24.11+rke2r1
-  - v1.23.17+rke2r1
+  - v1.30.12+rke2r1
+  - v1.29.15+rke2r1
   group: "General"
 - variable: kubernetesVersion
   default: v1.24.11+k3s1
@@ -51,14 +50,14 @@ questions:
 ## global
 - variable: global.nodepools.cluster
   label: "Cluster"
-  default: "PHX-SPOC020-1"
+  default: "SA-GPU"
   type: hostname
   description: "Target Nutanix Prism Element / AHV Cluster"
   required: true
   group: "Global"
 - variable: global.nodepools.project
   label: "Project"
-  default: "BootcampInfra"
+  default: "default"
   type: string
   description: "Nutanix Project where the virtual machine will be created"
   group: "Global"
@@ -70,7 +69,7 @@ questions:
   group: "Global"
 - variable: global.nodepools.vmNetwork
   label: "Network"
-  default: ["vlan2010"]
+  default: ["primary"]
   type: string
   description: "Nutanix network where the virtual machine will be attached"
   group: "Global"
@@ -98,7 +97,7 @@ questions:
 
 ## nodepools
 - variable: nodepools.0.name
-  default:
+  default: "control-plane-rke2"
   description: "Specify Control Plane nodepool name"
   type: string
   label: "Control Plane Nodepool name"
@@ -112,7 +111,7 @@ questions:
   label: "Control Plane Node count"
   group: "Nodepools"
 - variable: nodepools.1.name
-  default:
+  default: "etcd-rke2"
   description: "Specify Etcd nodepool name"
   type: string
   label: "Etcd Nodepool name"
@@ -126,14 +125,14 @@ questions:
   label: "Etcd Node count"
   group: "Nodepools"
 - variable: nodepools.2.name
-  default:
+  default: "workers-rke2"
   description: "Specify Worker nodepool name"
   type: string
   label: "Worker Nodepool name"
   required: true
   group: "Nodepools"
 - variable: nodepools.2.quantity
-  default: 1
+  default: 4
   description: "Specify Worker node count"
   type: int
   required: true

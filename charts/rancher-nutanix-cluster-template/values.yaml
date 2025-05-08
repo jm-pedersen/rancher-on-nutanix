@@ -13,7 +13,7 @@ cluster:
 cloudCredentialSecretName: "cattle-global-data:nutanix-pc-creds"
 
 # rke2 example
-kubernetesVersion: "v1.24.17+rke2r1"
+kubernetesVersion: "v1.31.8+rke2r1"
 
 # k3s example
 # kubernetesVersion: v1.24.17+k3s1
@@ -34,11 +34,11 @@ rke:
 # global nutanix nodepool configs. These configs can be overriden within each nodepool.
 global:
   nodepools:
-    cluster: PHX-SPOC020-1
-    project: BootcampInfra
+    cluster: SA-GPU
+    project: default
     vmImage: ubuntu-22.04-server-cloudimg-amd64.img
     vmNetwork:
-    - vlan2010
+    - primary
     vmCategories: 
     - AppType=Kubernetes
     cloudInit: |-
@@ -73,7 +73,7 @@ nodepools:
 - etcd: false
   controlplane: false
   worker: true
-  quantity: 1
+  quantity: 4
   name: worker
 
 ## example additional worker nodepool with overridden configs
